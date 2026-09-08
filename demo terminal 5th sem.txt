@@ -1,0 +1,174 @@
+Microsoft Windows [Version 10.0.19045.6466]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\HP\Desktop\demotesting>git init
+Initialized empty Git repository in C:/Users/HP/Desktop/demotesting/.git/
+
+C:\Users\HP\Desktop\demotesting>git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+
+C:\Users\HP\Desktop\demotesting>git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        Ville d'Oullins - Tom & Jerry.jfif
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+C:\Users\HP\Desktop\demotesting>git add
+Nothing specified, nothing added.
+hint: Maybe you wanted to say 'git add .'?
+hint: Disable this message with "git config set advice.addEmptyPathspec false"
+
+C:\Users\HP\Desktop\demotesting>git add .
+
+C:\Users\HP\Desktop\demotesting>git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   Ville d'Oullins - Tom & Jerry.jfif
+
+
+C:\Users\HP\Desktop\demotesting>git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   Ville d'Oullins - Tom & Jerry.jfif
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        ntg.txt
+
+
+C:\Users\HP\Desktop\demotesting>git add .
+
+C:\Users\HP\Desktop\demotesting>git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   Ville d'Oullins - Tom & Jerry.jfif
+        new file:   ntg.txt
+
+
+C:\Users\HP\Desktop\demotesting>git commit -m"this is msg"
+[master (root-commit) d4e099e] this is msg
+ 2 files changed, 1 insertion(+)
+ create mode 100644 Ville d'Oullins - Tom & Jerry.jfif
+ create mode 100644 ntg.txt
+
+C:\Users\HP\Desktop\demotesting>git remote add origin
+usage: git remote add [<options>] <name> <url>
+
+    -f, --[no-]fetch      fetch the remote branches
+    --[no-]tags           import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --[no-]track <branch>
+                          branch(es) to track
+    -m, --[no-]master <branch>
+                          master branch
+    --[no-]mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+
+C:\Users\HP\Desktop\demotesting>git remote add origin https://github.com/amulyad9845-creator/Testingdemo.git
+
+C:\Users\HP\Desktop\demotesting>git remote remove origin https://github.com/amulyad9845-creator/Testingdemo.git
+usage: git remote remove <name>
+
+
+C:\Users\HP\Desktop\demotesting>git remote add origin https://github.com/amulyad9845-creator/Testingdemo.git
+error: remote origin already exists.
+
+C:\Users\HP\Desktop\demotesting>git push -u origin master
+fatal: User cancelled dialog.
+Username for 'https://github.com':
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
