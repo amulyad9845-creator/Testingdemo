@@ -300,3 +300,557 @@ main form button:focus-visible {
 
     .task-card button { margin-left: auto; }
 }
+
+
+
+
+
+
+https://github.com/ashankdavid/JIT-MERN-2028B
+
+
+
+
+
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+    --ink: #172033;
+    --muted: #687386;
+    --paper: #f7f8fc;
+    --surface: #ffffff;
+    --line: #e5e8f0;
+    --navy: #172b4d;
+    --blue: #3978d8;
+    --coral: #f47b61;
+    --mint: #d9f2e7;
+    --gold: #f6c85f;
+    --shadow: 0 18px 45px rgba(33, 51, 82, 0.09);
+}
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+}
+
+nav {
+    align-items: center;
+    background: var(--navy);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px clamp(20px, 5vw, 72px);
+}
+
+nav h2,
+.welcome h1,
+main > h2,
+.stat-card h2,
+.task-card h3,
+main > div > h2 {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+nav h2 {
+    font-size: 20px;
+    letter-spacing: -0.4px;
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #cbd5e6;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 160ms ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+    color: var(--gold);
+}
+
+.nav-links a.active {
+    color: #fff;
+    position: relative;
+}
+
+.nav-links a.active::after {
+    background: var(--gold);
+    bottom: -8px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+.welcome {
+    background: linear-gradient(120deg, #e8f0ff 0%, #fff4df 100%);
+    padding: 52px clamp(20px, 5vw, 72px) 48px;
+}
+
+.welcome h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    letter-spacing: -1.8px;
+    margin: 0;
+    max-width: 650px;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 1240px;
+    padding: 36px clamp(20px, 5vw, 72px) 72px;
+}
+
+.stats-container {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 48px;
+}
+
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    min-height: 132px;
+    overflow: hidden;
+    padding: 22px;
+    position: relative;
+}
+
+.stat-card::after {
+    background: var(--coral);
+    border-radius: 50%;
+    content: "";
+    height: 52px;
+    position: absolute;
+    right: -18px;
+    top: -18px;
+    width: 52px;
+}
+
+.stat-card:nth-child(2)::after { background: var(--mint); }
+.stat-card:nth-child(3)::after { background: #dce8ff; }
+.stat-card:nth-child(4)::after { background: #fff0c9; }
+
+.stat-card h3 {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+}
+
+.stat-card h2 {
+    font-size: 30px;
+    letter-spacing: -1px;
+    margin: 0;
+}
+
+main > h2 {
+    font-size: 24px;
+    letter-spacing: -0.7px;
+    margin: 0 0 18px;
+}
+
+main > div > h2 {
+    font-size: 17px;
+    margin: 0 0 12px;
+}
+
+main form {
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(33, 51, 82, 0.05);
+    display: flex;
+    gap: 12px;
+    margin-bottom: 42px;
+    padding: 18px 20px;
+}
+
+.add-task-section {
+    margin-bottom: 42px;
+}
+
+.add-task-section h2 {
+    color: var(--navy);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 17px;
+    margin: 0 0 12px;
+}
+
+.add-task-section form {
+    margin-bottom: 0;
+}
+
+.field-group {
+    display: flex;
+    flex: 1 1 220px;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-group span {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+main form input {
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    color: var(--ink);
+    font: 14px "DM Sans", sans-serif;
+    min-width: 220px;
+    padding: 10px 12px;
+}
+
+main form input:focus {
+    border-color: var(--blue);
+    outline: 3px solid rgba(57, 120, 216, 0.15);
+}
+
+main form button,
+.task-card button {
+    border: 0;
+    border-radius: 7px;
+    color: #fff;
+    cursor: pointer;
+    font: 600 13px "DM Sans", sans-serif;
+    padding: 10px 14px;
+}
+
+main form button {
+    background: var(--coral);
+}
+
+main form button:hover,
+main form button:focus-visible {
+    background: #dc654d;
+}
+
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-card {
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--blue);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(33, 51, 82, 0.05);
+    display: grid;
+    gap: 16px;
+    grid-template-columns: minmax(150px, 1.2fr) minmax(180px, 2fr) auto auto auto;
+    padding: 18px 20px;
+    transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.task-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+}
+
+.task-card h3 {
+    font-size: 16px;
+    margin: 0;
+}
+
+.task-card p {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0;
+}
+
+.task-card p:nth-of-type(2) {
+    background: #eef3ff;
+    border-radius: 20px;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+    justify-self: start;
+    padding: 7px 10px;
+    white-space: nowrap;
+}
+
+.task-card button {
+    background: var(--navy);
+    transition: background 160ms ease, transform 160ms ease;
+}
+
+.task-card button:hover,
+.task-card button:focus-visible {
+    background: var(--blue);
+    transform: translateY(-1px);
+}
+
+.task-card a {
+    background: #eef3ff;
+    border-radius: 7px;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: center;
+    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.task-card a:hover,
+.task-card a:focus-visible {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 760px) {
+    .stats-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-bottom: 36px;
+    }
+
+    .task-card {
+        align-items: start;
+        grid-template-columns: 1fr auto;
+    }
+
+    .task-card p:first-of-type { grid-column: 1 / -1; }
+    .task-card p:nth-of-type(2) { grid-column: 1; }
+    .task-card button { grid-column: 2; grid-row: 3; }
+}
+
+@media (max-width: 430px) {
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .welcome {
+        padding-bottom: 36px;
+        padding-top: 38px;
+    }
+
+    .stats-container { gap: 10px; }
+
+    main form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    main form input {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .stat-card {
+        min-height: 112px;
+        padding: 16px;
+    }
+
+    .stat-card h2 { font-size: 24px; }
+
+    .task-card {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .task-card h3,
+    .task-card p:first-of-type {
+        flex-basis: 100%;
+    }
+
+    .task-card button { margin-left: auto; }
+}
+
+.page-shell {
+    min-height: calc(100vh - 69px);
+}
+
+.page-heading {
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+}
+
+.page-heading h1,
+.task-detail h1 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(30px, 5vw, 44px);
+    letter-spacing: -1.5px;
+    margin: 0 0 8px;
+}
+
+.page-heading > p:last-child {
+    color: var(--muted);
+    margin: 0;
+}
+
+.eyebrow {
+    color: var(--coral);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+}
+
+.task-list {
+    display: grid;
+    gap: 14px;
+}
+
+.task-list-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--blue);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(33, 51, 82, 0.05);
+    padding: 20px 22px;
+    transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.task-list-item:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+}
+
+.task-list-item h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 18px;
+    margin: 0 0 8px;
+}
+
+.task-list-item > p:not(.status) {
+    color: var(--muted);
+    margin: 0 0 16px;
+}
+
+.status {
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0;
+    padding: 7px 10px;
+}
+
+.status-completed {
+    background: var(--mint);
+    color: #287552;
+}
+
+.status-pending {
+    background: #fff0c9;
+    color: #946c00;
+}
+
+.task-detail,
+.empty-state {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin: 0 auto;
+    max-width: 760px;
+    padding: clamp(24px, 5vw, 48px);
+}
+
+.task-detail h1 {
+    margin-bottom: 18px;
+}
+
+.task-detail-description,
+.empty-state p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+
+.empty-state h2 {
+    font-family: "Space Grotesk", sans-serif;
+    margin: 0 0 10px;
+}
+
+@media (max-width: 760px) {
+    .page-shell {
+        padding-top: 28px;
+    }
+
+    .task-card a {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+
+    .add-task-section form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .field-group {
+        flex-basis: auto;
+    }
+}
+
+@media (max-width: 430px) {
+    .task-card a {
+        width: 100%;
+    }
+}
+
+main form input::placeholder {
+    color: #9aa4b5;
+}
+
+.task-card .status-completed {
+    background: var(--mint);
+    color: #287552;
+}
+
+.task-card .status-pending {
+    background: #fff0c9;
+    color: #946c00;
+}
+
+.compact-empty {
+    max-width: none;
+    padding: 28px;
+}
+
+.compact-empty p {
+    margin-bottom: 0;
+}
+
+.feedback-message {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--muted);
+    margin: 0;
+    padding: 20px;
+}
+
+.error-message {
+    border-left: 4px solid var(--coral);
+    color: #a14b3a;
+}
