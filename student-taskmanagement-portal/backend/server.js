@@ -1,0 +1,41 @@
+//bring express in node.js
+const express = require("express")
+
+//installing cors middleware
+const cors = require("cors");
+
+//create express app using what we imported
+const app = express();
+
+//use cors middleware to handle requests
+app.use(cors());
+
+  const tasks=[
+          {
+              id:1,
+              title:"Learn React",
+              description:"Understanding Components",
+              status: "Completed"
+          },
+          {
+              id:2,
+              title:"Learn JavaScript",
+              description:"Understanding Variables, Functions",
+              status: "Pending"
+          }
+      ];
+
+app.get("/api/tasks",(req,res)=>{
+    res.json(tasks);
+})
+
+
+// API Route (Testing Backend)
+app.get("/",(req,res) => {
+    res.send("Backend is Working!!")
+});
+
+//Start the server and listen to port 5000
+app.listen(5000,() => {
+    console.log("Sever is Running on Port 5000");
+});
