@@ -13,7 +13,6 @@ function AddTask (props){
       status:"To Do"
     };
     console.log("Object:",newTask);
-    try{
     const response = await fetch("http://localhost:5000/api/tasks",{
       method:"POST",
       headers:{"Content-type":"application/json"},
@@ -22,10 +21,7 @@ function AddTask (props){
 
     const data = await response.json();
     props.onAddTask(data);
-  }catch(error){
-    console.log(error);
   }
-}
   return (
     <div>
       <h2>ADD TASK</h2>

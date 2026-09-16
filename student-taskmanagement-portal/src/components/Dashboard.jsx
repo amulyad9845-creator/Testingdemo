@@ -1,64 +1,104 @@
-import StatCard from "./StatCard";
-import TaskCard from "./TaskCard";
-import AddTask from "./AddTask";
+import StatCard from "./StatCard"; 
+import TaskList from "./Tasklist";
+import { useState } from "react"; 
+import AddTask from "./AddTask"; 
 
-function Dashboard(props) {
+function Dashboard(props) { 
+  async function toggleTask(id) { 
+    const currentTasks = props.tasks || [];
+    const targetTask = currentTasks.find(task => Number(task.id) === Number(id));
+    if (!targetTask) return;
 
-    function toggleTask(id){
-        props.setTasks(
-            props.tasks.map((task) => {
-                if(task.id === id){
-                    return {...task, 
-                        status: task.status === "Completed" 
-                                    ? "Pending" 
-                                    : "Completed"
-                    };
-                }
-                return task;
-            })
-        );
+    const currentStatus = (targetTask.status || "To Do").toLowerCase();
+    let nextStatus = "To Do";
+
+    if (currentStatus === "to do") {
+      nextStatus = "In Progress";
+    } else if (currentStatus === "in progress") {
+      nextStatus = "Completed";
+    } else if (currentStatus === "completed") {
+      nextStatus = "To Do";
     }
 
-    function addTask(newTask){
-        props.setTasks([...props.tasks, newTask]);
+    try {
+      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ status: nextStatus })
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update task");
+      }
+
+      const updatedTask = await response.json(); 
+
+      props.setTasks((prevTasks) => 
+        prevTasks.map((task) => 
+          Number(task.id) === Number(id) ? updatedTask : task
+        )
+      );
+    } catch (error) {
+      console.warn("Backend server not synced:", error);
     }
+  } 
 
-    function deleteTask(id){
-        props.setTasks(
-            props.tasks.filter((task)=>task.id !==id)
-        );
+  function addTask(newTask) { 
+    props.setTasks((prevTasks) => [...prevTasks, newTask]); 
+  } 
+
+  async function deleteTask(id) {
+    try {
+      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+        method: "DELETE"
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete task");
+      }
+
+      const deletedTask = await response.json();
+      props.setTasks((prevTasks) => 
+        prevTasks.filter((t) => Number(t.id) !== Number(deletedTask.id))
+      ); 
+    } catch (error) {
+      console.warn("Backend server not synced:", error);
     }
+  } 
 
-    return (
-        <main>
-        
-            <div className="stats-container">
-                <StatCard title="Total Tasks" value="10"/>
-                <StatCard title="Completed" value="6"/>
-                <StatCard title="Pending" value="4"/>
-                
-            </div>
+  const currentTasks = props.tasks || [];
+  const totalTasks = currentTasks.length;
+  const completedTasks = currentTasks.filter(t => (t.status || "").toLowerCase() === "completed").length;
+  const pendingTasks = totalTasks - completedTasks;
 
-            <AddTask  onAddTask={addTask}/>
-
-            <h2>Recent Tasks</h2>
-
-            <div className="tasks-container">
-                {props.tasks.map((task)=>(
-                    <TaskCard 
-                        key={task.id} 
-                        id ={task.id}
-                        title={task.title} 
-                        description={task.description} 
-                        status={task.status}
-                        onToggle={()=>toggleTask(task.id)} 
-                        onDelete={()=>deleteTask(task.id)}
-                    />
-                ))};
-            </div>
-
-        </main>
-    );
-}
+  return ( 
+    <main> 
+      <div className="stat-container"> 
+        <StatCard title={"Total Tasks"} value={totalTasks} /> 
+        <StatCard title={"Completed Tasks"} value={completedTasks} /> 
+        <StatCard title={"Pending Tasks"} value={pendingTasks} /> 
+      </div> 
+      
+      <AddTask onAddTask={addTask}/> 
+      
+      <h2>Recent Tasks</h2> 
+      <div className="task-container"> 
+        {currentTasks.map((task) => ( 
+          <TaskList 
+            key={task.id} 
+            id={task.id} 
+            title={task.title} 
+            description={task.description} 
+            status={task.status} 
+            onToggle={() => toggleTask(task.id)} 
+            onDelete={() => deleteTask(task.id)} 
+          /> 
+        ))} 
+      </div> 
+    </main> 
+  ); 
+} 
 
 export default Dashboard;
