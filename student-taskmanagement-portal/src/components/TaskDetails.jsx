@@ -1,12 +1,13 @@
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 function TaskDetails(props){
-   const [task, setTask] = useState(null);
+   const { id } = useParams();
+   const [task, setTask] = useState(() =>
+     props.tasks.find((t) => t._id === id) || null
+   );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    // FIXED: Ensured the URL template literal is clean
     fetch(`http://localhost:5000/api/tasks/${id}`)
       .then((response) => {
         if (!response.ok) { 
@@ -15,7 +16,7 @@ function TaskDetails(props){
         return response.json();
       })
       .then((data) => {
-        setTask(data); // Saves the fetched task successfully
+        setTask(data); 
       })
       .catch((error) => {
         console.log(error);
@@ -26,6 +27,10 @@ function TaskDetails(props){
       });
   }, [id]);
 
+    if (loading) {
+        return <h2>Loading...</h2>;
+    }
+
     if(!task){
         return <h2> Task not found </h2>
     }
@@ -35,7 +40,8 @@ function TaskDetails(props){
             <h1>Task Details</h1>
             <h2>{task.title}</h2>
             <p>{task.description}</p>
-            <p>Status: {task.status}</p>
+            <p className="task-id">Task ID: {task._id}</p>
+            <p className={`status-badge ${task.status === "Completed" ? "status-completed" : "status-pending"}`}>{task.status}</p>
         </div>
     );
 }
